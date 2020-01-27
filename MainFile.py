@@ -9,9 +9,11 @@ class CoffeeMachine:
         self.money = money
 
     def __str__(self):
+        """Basic output of information."""
         print("Coffee machine work correct. Current supply: water - {}, milk - {}, coffee beans - {}, cups - {}".format(self.water, self.milk, self.coffee_beans, self.cups))
 
     def __new__(cls):
+        """Limited the number of coffee machines. No more then one."""
         if cls.number_machine == 0:
             instance = object.__new__(cls)
             cls.number_machine += 1

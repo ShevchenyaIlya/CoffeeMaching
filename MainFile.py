@@ -1,4 +1,6 @@
 class CoffeeMachine:
+    number_machine = 0
+    """Basic class that represent functionality of coffee machine"""
     def __init__(self, coffee_beans, milk, water, money, cups):
         self.coffee_beans = coffee_beans
         self.water = water
@@ -6,19 +8,24 @@ class CoffeeMachine:
         self.milk = milk
         self.money = money
 
+    def __str__(self):
+        print("Coffee machine work correct. Current supply: water - {}, milk - {}, coffee beans - {}, cups - {}".format(self.water, self.milk, self.coffee_beans, self.cups))
 
-coffee = CoffeeMachine(120, 540, 400, 550, 9)
+    def __new__(cls):
+        if cls.number_machine == 0:
+            instance = object.__new__(cls)
+            cls.number_machine += 1
+            return instance
 
-
-def current_supply():
-    global coffee
-    print()
-    print("The coffee machine has: ")
-    print(coffee.water, "of water")
-    print(coffee.milk, "of milk")
-    print(coffee.coffee_beans, "of coffee beans")
-    print(coffee.cups, "of disposable cups")
-    print("$", coffee.money, " of money", sep="")
+    def current_supply(self):
+        global coffee
+        print()
+        print("The coffee machine has: ")
+        print(self.water, "of water")
+        print(self.milk, "of milk")
+        print(self.coffee_beans, "of coffee beans")
+        print(self.cups, "of disposable cups")
+        print("$", self.money, " of money", sep="")
 
 
 def enough_supply(coffee_beans, water, milk, cups, money):
@@ -66,6 +73,7 @@ def take():
 
 
 def main():
+    global coffee
     actions = ["buy", "fill", "take", "remaining", "exit"]
     while True:
         choice = input("\nWrite action (buy, fill, take, remaining, exit): ")
@@ -78,9 +86,10 @@ def main():
             elif choice == "take":
                 take()
             elif choice == "remaining":
-                current_supply()
+                coffee.current_supply()
             elif choice == "exit":
                 break
 
 
+coffee = CoffeeMachine(120, 540, 400, 550, 9)
 main()

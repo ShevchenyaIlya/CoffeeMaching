@@ -1,6 +1,7 @@
 class CoffeeMachine:
-    number_machine = 0
     """Basic class that represent functionality of coffee machine"""
+    number_machine = 0
+
     def __init__(self, coffee_beans, milk, water, money, cups):
         self.coffee_beans = coffee_beans
         self.water = water
@@ -11,13 +12,6 @@ class CoffeeMachine:
     def __str__(self):
         """Basic output of information."""
         print("Coffee machine work correct. Current supply: water - {}, milk - {}, coffee beans - {}, cups - {}".format(self.water, self.milk, self.coffee_beans, self.cups))
-
-    def __new__(cls):
-        """Limited the number of coffee machines. No more then one."""
-        if cls.number_machine == 0:
-            instance = object.__new__(cls)
-            cls.number_machine += 1
-            return instance
 
     def current_supply(self):
         global coffee
